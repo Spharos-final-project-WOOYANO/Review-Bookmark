@@ -18,16 +18,16 @@ pipeline {
         stage('DockerSize'){
             steps {
                 sh '''
-                    docker stop Review-Bookmark-Service || true
-                    docker rm Review-Bookmark-Service || true
-                    docker rmi Review-Bookmark-Service-Img || true
-                    docker build -t Review-Bookmark-Service-Img:latest .
+                    docker stop review-bookmark-service || true
+                    docker rm review-bookmark-service || true
+                    docker rmi review-bookmark-service-img || true
+                    docker build -t review-bookmark-service-img:latest .
                 '''
             }
         }
         stage('Deploy'){
             steps{
-                sh 'docker run -d --name Review-Bookmark-Service -p 8080:8000 Review-Bookmark-Service-Img'
+                sh 'docker run -d --name review-bookmark-service -p 8005:8000 review-bookmark-service-img'
             }
         }
     }
