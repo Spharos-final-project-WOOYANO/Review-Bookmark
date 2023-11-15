@@ -8,6 +8,7 @@ import shparos.review_bookmark.global.common.response.BaseResponse;
 import shparos.review_bookmark.review.application.UserReviewService;
 import shparos.review_bookmark.review.dto.ReviewRegisterDto;
 import shparos.review_bookmark.review.vo.request.ReviewRegisterRequest;
+import shparos.review_bookmark.review.vo.response.UserReviewDetailResponse;
 import shparos.review_bookmark.review.vo.response.UserReviewListResponse;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class UserReviewController {
         return new BaseResponse<>();
     }
 
-    @Operation(summary = "리뷰리스트 조회",
+    @Operation(summary = "유저 리뷰리스트 조회",
             description = "유저가 등록한 리뷰리스트 조회",
             tags = { "Review" })
     @GetMapping("/list")
@@ -51,5 +52,26 @@ public class UserReviewController {
         return new BaseResponse<>(response);
     }
 
+    @Operation(summary = "리뷰 상세내역 조회",
+            description = "리뷰 상세내역 조회",
+            tags = { "Review" })
+    @GetMapping("/{reviewId}")
+    public BaseResponse<?> getReview(@PathVariable("reviewId") Long reviewId) {
+
+        // 리뷰 상세내역 조회
+        UserReviewDetailResponse response = userReviewService.getReviewDetail(reviewId);
+        return new BaseResponse<>(response);
+    }
+
+    @Operation(summary = "리뷰삭제",
+            description = "리뷰삭제",
+            tags = { "Review" })
+    @DeleteMapping("/{reviewId}")
+    public BaseResponse<?> deleteReview(@PathVariable("reviewId") Long reviewId) {
+
+        // 리뷰삭제
+        userReviewService.deleteReview(reviewId);
+        return new BaseResponse<>();
+    }
 
 }
