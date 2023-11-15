@@ -11,14 +11,13 @@ public enum ResponseCode {
     /**
      * 200: 요청 성공
      **/
-    SUCCESS(HttpStatus.OK,true, 200, "요청에 성공하였습니다.");
+    SUCCESS(HttpStatus.OK,true, 200, "요청에 성공하였습니다."),
 
 
     /**
      * 에러 코드
      */
-    // 예시
-//    LOGIN_FAIL(HttpStatus.BAD_REQUEST, false, 1010, "아이디 또는 비밀번호를 확인해 주세요."),
+    CANNOT_FIND_REVIEW(HttpStatus.BAD_REQUEST, false, 4010, "해당하는 리뷰가 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final boolean success;

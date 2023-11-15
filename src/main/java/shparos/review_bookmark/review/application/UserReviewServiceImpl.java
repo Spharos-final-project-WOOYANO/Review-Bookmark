@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shparos.review_bookmark.global.common.response.ResponseCode;
+import shparos.review_bookmark.global.exception.CustomException;
 import shparos.review_bookmark.review.domain.Review;
 import shparos.review_bookmark.review.domain.ReviewImage;
 import shparos.review_bookmark.review.dto.ReviewRegisterDto;
 import shparos.review_bookmark.review.infrastructure.ReviewImageRepository;
 import shparos.review_bookmark.review.infrastructure.ReviewRepository;
+import shparos.review_bookmark.review.vo.response.UserReviewDetailResponse;
 import shparos.review_bookmark.review.vo.response.UserReviewListResponse;
 
 import java.util.ArrayList;
@@ -66,6 +69,56 @@ public class UserReviewServiceImpl implements UserReviewService {
         }
 
         return responseList;
+    }
+
+    // 리뷰 상세내역 조회
+    @Override
+    public UserReviewDetailResponse getReviewDetail(Long reviewId) {
+
+        // 리뷰를 조회
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new CustomException(ResponseCode.CANNOT_FIND_REVIEW));
+
+        // 리뷰이미지를 조회
+        List<ReviewImage> reviewImageList = reviewImageRepository.findByReview(review);
+
+        List<String> imageUrlList = new ArrayList<>();
+        // 리뷰이미지가 존재하는 경우
+        if(!reviewImageList.isEmpty()) {
+            imageUrlList = reviewImageList.stream()
+                    .map(ReviewImage::getImageUrl).toList();
+        }
+
+        return UserReviewDetailResponse.builder()
+                .createdAt(review.getCreatedAt())
+                .reuse(review.getReuse())
+                .imageUrlList(imageUrlList)
+                .content(review.getContent())
+                .answerContent(review.getAnswerContent())
+                .build();
+    }
+
+    // 리뷰삭제
+    @Override
+    @Transactional
+    public void deleteReview(Long reviewId) {
+
+        // 삭제할 리뷰를 조회
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new CustomException(ResponseCode.CANNOT_FIND_REVIEW));
+
+        // 삭제할 리뷰이미지가 존재하는지 조회
+        List<ReviewImage> reviewImageList = reviewImageRepository.findByReview(review);
+
+        // 리뷰이미지가 존재하는 경우 삭제
+        if(!reviewImageList.isEmpty()) {
+            for(ReviewImage reviewImage : reviewImageList) {
+                reviewImageRepository.delete(reviewImage);
+            }
+        }
+
+        // 리뷰를 삭제
+        reviewRepository.delete(review);
     }
 
 
