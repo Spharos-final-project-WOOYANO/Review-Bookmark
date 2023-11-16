@@ -17,7 +17,8 @@ public enum ResponseCode {
     /**
      * 에러 코드
      */
-    CANNOT_FIND_REVIEW(HttpStatus.BAD_REQUEST, false, 4010, "해당하는 리뷰가 존재하지 않습니다.");
+    CANNOT_FIND_REVIEW(HttpStatus.BAD_REQUEST, false, 4010, "해당하는 리뷰가 존재하지 않습니다."),
+    CANNOT_FIND_BOOKMARK(HttpStatus.BAD_REQUEST, false, 4020, "해당하는 찜이 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final boolean success;
