@@ -1,4 +1,4 @@
-package shparos.review_bookmark;
+package spharos.review_bookmark;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
