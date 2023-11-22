@@ -8,6 +8,8 @@ import spharos.review_bookmark.review.application.ReviewService;
 import spharos.review_bookmark.review.dto.BookmarkReviewTotalNumberDto;
 import spharos.review_bookmark.review.dto.ReviewListDto;
 import spharos.review_bookmark.review.vo.response.TotalBookmarkReviewResponse;
+
+import java.awt.print.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +23,7 @@ public class ReviewController {
             description = "찜 수와 리뷰 수 확인",
             tags = { "Bookmark&Review" })
     @PostMapping("/count/review_bookmark")
-    public BaseResponse<List<TotalBookmarkReviewResponse>> countReviewBookmarkController(@RequestBody List<Long> serviceIdList) {
+    public BaseResponse<List<TotalBookmarkReviewResponse>> countReviewBookmarkController(@RequestBody List<Long> serviceIdList){
 
         List<BookmarkReviewTotalNumberDto> bookmarkReviewTotalNumberDtoList = reviewService.countBookmarkReview(serviceIdList);
 
