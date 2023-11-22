@@ -9,7 +9,6 @@ import spharos.review_bookmark.bookmark.infrastructure.BookmarkRepository;
 import spharos.review_bookmark.bookmark.vo.response.BookmarkResponse;
 import spharos.review_bookmark.global.common.response.ResponseCode;
 import spharos.review_bookmark.global.exception.CustomException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,4 +63,5 @@ public class BookmarkServiceImpl implements BookmarkService{
         Bookmark bookmark = Bookmark.createBookmark(email, serviceId);
         bookmarkRepository.save(bookmark);
     }
+
 }

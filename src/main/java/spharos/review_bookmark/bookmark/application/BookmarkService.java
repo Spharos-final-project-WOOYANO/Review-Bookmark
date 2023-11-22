@@ -1,7 +1,6 @@
 package spharos.review_bookmark.bookmark.application;
 
 import spharos.review_bookmark.bookmark.vo.response.BookmarkResponse;
-
 import java.util.List;
 
 public interface BookmarkService {
@@ -14,4 +13,5 @@ public interface BookmarkService {
 
     // 찜 추가
     void registerBookmark(String email, Long serviceId);
+
 }

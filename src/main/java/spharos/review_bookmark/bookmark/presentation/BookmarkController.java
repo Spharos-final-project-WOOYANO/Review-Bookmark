@@ -8,7 +8,6 @@ import spharos.review_bookmark.bookmark.application.BookmarkService;
 import spharos.review_bookmark.bookmark.vo.request.RegisterBookmarkRequest;
 import spharos.review_bookmark.bookmark.vo.response.BookmarkResponse;
 import spharos.review_bookmark.global.common.response.BaseResponse;
-
 import java.util.List;
 
 @Slf4j
@@ -53,5 +52,6 @@ public class BookmarkController {
         bookmarkService.registerBookmark(email, request.getServiceId());
         return new BaseResponse<>();
     }
+
 
 }
