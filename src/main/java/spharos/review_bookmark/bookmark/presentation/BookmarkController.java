@@ -18,8 +18,8 @@ public class BookmarkController {
 
     private final BookmarkService bookmarkService;
 
-    @Operation(summary = "찜리스트 조회",
-            description = "찜리스트 조회",
+    @Operation(summary = "찜 리스트 조회",
+            description = "찜 리스트 조회",
             tags = { "Bookmark" })
     @GetMapping("/list")
     public BaseResponse<?> getBookmarkList(@RequestHeader("email") String email) {

@@ -2,15 +2,12 @@ package spharos.review_bookmark.review.presentation;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spharos.review_bookmark.global.common.response.BaseResponse;
 import spharos.review_bookmark.review.application.ReviewService;
 import spharos.review_bookmark.review.dto.BookmarkReviewTotalNumberDto;
+import spharos.review_bookmark.review.dto.ReviewListDto;
 import spharos.review_bookmark.review.vo.response.TotalBookmarkReviewResponse;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class ReviewController {
             description = "찜 수와 리뷰 수 확인",
             tags = { "Bookmark&Review" })
     @PostMapping("/count/review_bookmark")
-    public BaseResponse<List<TotalBookmarkReviewResponse>> countReviewBookmark(@RequestBody List<Long> serviceIdList) {
+    public BaseResponse<List<TotalBookmarkReviewResponse>> countReviewBookmarkController(@RequestBody List<Long> serviceIdList) {
 
         List<BookmarkReviewTotalNumberDto> bookmarkReviewTotalNumberDtoList = reviewService.countBookmarkReview(serviceIdList);
 
@@ -40,5 +37,17 @@ public class ReviewController {
         }
 
         return new BaseResponse<>(totalBookmarkReviewResponseList);
+    }
+
+    @Operation(summary = "리뷰 리스트 조회",
+            description = "리뷰 리스트 조회",
+            tags = { "Review List Retrieve" })
+    @GetMapping("/review/list")
+    public BaseResponse<List<ReviewListDto>> retrieveReviewListController(@RequestParam("serviceId") Long serviceId){
+        // 리뷰 리스트 조회
+        List<ReviewListDto> reviewListDtoList = reviewService.retrieveReviewList(serviceId);
+
+        return new BaseResponse<>(reviewListDtoList);
+
     }
 }
