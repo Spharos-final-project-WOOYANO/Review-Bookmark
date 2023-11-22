@@ -44,7 +44,7 @@ public class Review extends BaseEntity {
 
     // 리뷰 등록
     public static Review createReview(String userEmail, Long serviceId, String reservationNum,
-                                      String content, Boolean reuse) {
+                                        String content, Boolean reuse) {
         return new Review(userEmail, serviceId, reservationNum, content, reuse);
     }
 

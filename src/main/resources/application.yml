@@ -4,4 +4,4 @@ spring:
   application:
     name: review-bookmark-service
   profiles:
-    default: secret
+    default: local

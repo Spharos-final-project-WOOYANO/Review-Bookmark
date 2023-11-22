@@ -13,9 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 public class ReviewListDto {
 
-    private List<String> reviewImageUrlList;
     private String reviewContent;
     private LocalDateTime reviewCreateAt;
+    private List<String> reviewImageUrlList;
     private String answerContent;
+    private String writerNickName;
+    private String writerProfileImageUrl;
     private boolean reuse;
+
 }
