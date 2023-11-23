@@ -1,7 +1,6 @@
 package spharos.review_bookmark.review.vo.request;
 
 import lombok.Getter;
-
 import java.util.List;
 
 @Getter

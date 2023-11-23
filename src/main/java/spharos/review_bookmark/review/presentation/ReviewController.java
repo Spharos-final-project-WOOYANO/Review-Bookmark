@@ -5,12 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import spharos.review_bookmark.global.common.response.BaseResponse;
 import spharos.review_bookmark.review.application.ReviewService;
-import spharos.review_bookmark.review.dto.BookmarkReviewTotalNumberDto;
 import spharos.review_bookmark.review.dto.ReviewListDto;
 import spharos.review_bookmark.review.vo.response.TotalBookmarkReviewResponse;
-
-import java.awt.print.Pageable;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,22 +19,17 @@ public class ReviewController {
             description = "찜 수와 리뷰 수 확인",
             tags = { "Bookmark&Review" })
     @PostMapping("/count/review_bookmark")
-    public BaseResponse<List<TotalBookmarkReviewResponse>> countReviewBookmarkController(@RequestBody List<Long> serviceIdList){
+    public BaseResponse<?> countReviewBookmarkController(@RequestBody List<Long> serviceIdList){
 
-        List<BookmarkReviewTotalNumberDto> bookmarkReviewTotalNumberDtoList = reviewService.countBookmarkReview(serviceIdList);
+        List<TotalBookmarkReviewResponse> responseList = reviewService.countBookmarkReview(serviceIdList).stream()
+                .map(bookmarkReviewTotalNumberDto -> TotalBookmarkReviewResponse.builder()
+                        .serviceId(bookmarkReviewTotalNumberDto.getServiceId())
+                        .totalBookmark(bookmarkReviewTotalNumberDto.getTotalBookmark())
+                        .totalReview(bookmarkReviewTotalNumberDto.getTotalReview())
+                        .build())
+                .toList();
 
-        List<TotalBookmarkReviewResponse> totalBookmarkReviewResponseList = new ArrayList<>();
-
-        for (BookmarkReviewTotalNumberDto bookmarkReviewTotalNumberDto: bookmarkReviewTotalNumberDtoList) {
-            TotalBookmarkReviewResponse totalBookmarkReviewResponse = TotalBookmarkReviewResponse.builder()
-                    .serviceId(bookmarkReviewTotalNumberDto.getServiceId())
-                    .totalBookmark(bookmarkReviewTotalNumberDto.getTotalBookmark())
-                    .totalReview(bookmarkReviewTotalNumberDto.getTotalReview())
-                    .build();
-            totalBookmarkReviewResponseList.add(totalBookmarkReviewResponse);
-        }
-
-        return new BaseResponse<>(totalBookmarkReviewResponseList);
+        return new BaseResponse<>(responseList);
     }
 
     @Operation(summary = "리뷰 리스트 조회",
