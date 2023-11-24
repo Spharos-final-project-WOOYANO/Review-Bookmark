@@ -8,6 +8,7 @@ import spharos.review_bookmark.global.common.response.BaseResponse;
 import spharos.review_bookmark.review.application.UserReviewService;
 import spharos.review_bookmark.review.dto.ReviewRegisterDto;
 import spharos.review_bookmark.review.vo.request.ReviewRegisterRequest;
+import spharos.review_bookmark.review.vo.response.UserReviewAvailableCheckResponse;
 import spharos.review_bookmark.review.vo.response.UserReviewDetailResponse;
 import spharos.review_bookmark.review.vo.response.UserReviewListResponse;
 
@@ -21,6 +22,9 @@ public class UserReviewController {
 
     private final UserReviewService userReviewService;
 
+    /*
+        리뷰등록
+    */
     @Operation(summary = "리뷰등록",
             description = "리뷰등록",
             tags = { "Review" })
@@ -41,6 +45,9 @@ public class UserReviewController {
         return new BaseResponse<>();
     }
 
+    /*
+        유저 리뷰리스트 조회
+    */
     @Operation(summary = "유저 리뷰리스트 조회",
             description = "유저가 등록한 리뷰리스트 조회",
             tags = { "Review" })
@@ -52,6 +59,9 @@ public class UserReviewController {
         return new BaseResponse<>(response);
     }
 
+    /*
+        리뷰 상세내역 조회
+    */
     @Operation(summary = "리뷰 상세내역 조회",
             description = "리뷰 상세내역 조회",
             tags = { "Review" })
@@ -63,6 +73,9 @@ public class UserReviewController {
         return new BaseResponse<>(response);
     }
 
+    /*
+        리뷰삭제
+    */
     @Operation(summary = "리뷰삭제",
             description = "리뷰삭제",
             tags = { "Review" })
@@ -73,5 +86,25 @@ public class UserReviewController {
         userReviewService.deleteReview(reviewId);
         return new BaseResponse<>();
     }
+
+    /*
+        리뷰등록가능여부 조회
+    */
+    @Operation(summary = "리뷰등록가능여부 조회",
+            description = "리뷰등록가능여부 조회",
+            tags = { "Review" })
+    @GetMapping("/check/review/available/{reservationNum}")
+    public BaseResponse<?> checkReviewAvailable(@PathVariable("reservationNum") String reservationNum) {
+
+        // 리뷰등록가능여부 조회
+        Boolean checkResult = userReviewService.checkReviewAvailable(reservationNum);
+
+        UserReviewAvailableCheckResponse response = UserReviewAvailableCheckResponse.builder()
+                .checkResult(checkResult)
+                .build();
+        return new BaseResponse<>(response);
+    }
+
+
 
 }

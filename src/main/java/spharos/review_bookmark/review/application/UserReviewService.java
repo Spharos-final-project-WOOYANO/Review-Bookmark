@@ -16,5 +16,7 @@ public interface UserReviewService {
     UserReviewDetailResponse getReviewDetail(Long reviewId);
     // 리뷰삭제
     void deleteReview(Long reviewId);
+    // 리뷰등록가능여부 조회
+    Boolean checkReviewAvailable(String reservationNum);
 
 }
