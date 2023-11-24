@@ -48,4 +48,16 @@ public class Review extends BaseEntity {
         return new Review(userEmail, serviceId, reservationNum, content, reuse);
     }
 
+    // 리뷰 답글 등록
+    public void registerReply(String answerContent, LocalDateTime answerCreatedAt) {
+        this.answerContent = answerContent;
+        this.answerCreatedAt = answerCreatedAt;
+    }
+
+    // 리뷰 답글 수정
+    public void modifyReply(String answerContent, LocalDateTime answerUpdatedAt) {
+        this.answerContent = answerContent;
+        this.answerUpdatedAt = answerUpdatedAt;
+    }
+
 }
