@@ -10,6 +10,7 @@ import spharos.review_bookmark.review.domain.Review;
 import spharos.review_bookmark.review.domain.ReviewImage;
 import spharos.review_bookmark.review.infrastructure.ReviewImageRepository;
 import spharos.review_bookmark.review.infrastructure.ReviewRepository;
+import spharos.review_bookmark.review.vo.request.ReviewReplyModifyRequest;
 import spharos.review_bookmark.review.vo.request.ReviewReplyRegisterRequest;
 import spharos.review_bookmark.review.vo.response.ClientReviewDetailResponse;
 import spharos.review_bookmark.review.vo.response.ClientReviewListResponse;
@@ -94,5 +95,18 @@ public class ClientReviewServiceImpl implements ClientReviewService {
 
         // 리뷰 답글 작성
         review.registerReply(request.getAnswerContent(), LocalDateTime.now());
+    }
+
+    // 리뷰 답글 수정
+    @Override
+    @Transactional
+    public void modifyReviewReply(ReviewReplyModifyRequest request) {
+
+        // 리뷰 정보를 조회
+        Review review = reviewRepository.findById(request.getReviewId())
+                .orElseThrow(() -> new CustomException(ResponseCode.CANNOT_FIND_REVIEW));
+
+        // 리뷰 답글 수정
+        review.modifyReply(request.getAnswerContent(), LocalDateTime.now());
     }
 }

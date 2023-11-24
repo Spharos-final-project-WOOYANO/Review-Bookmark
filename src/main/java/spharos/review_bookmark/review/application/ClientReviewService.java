@@ -1,5 +1,6 @@
 package spharos.review_bookmark.review.application;
 
+import spharos.review_bookmark.review.vo.request.ReviewReplyModifyRequest;
 import spharos.review_bookmark.review.vo.request.ReviewReplyRegisterRequest;
 import spharos.review_bookmark.review.vo.response.ClientReviewDetailResponse;
 import spharos.review_bookmark.review.vo.response.ClientReviewListResponse;
@@ -14,6 +15,8 @@ public interface ClientReviewService {
     ClientReviewDetailResponse getClientReviewDetail(Long reviewId);
     // 리뷰 답글 작성
     void registerReviewReply(ReviewReplyRegisterRequest request);
+    // 리뷰 답글 수정
+    void modifyReviewReply(ReviewReplyModifyRequest request);
 
 
 }

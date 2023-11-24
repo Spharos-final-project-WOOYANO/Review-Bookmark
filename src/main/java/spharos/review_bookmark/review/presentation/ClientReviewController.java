@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import spharos.review_bookmark.global.common.response.BaseResponse;
 import spharos.review_bookmark.review.application.ClientReviewService;
+import spharos.review_bookmark.review.vo.request.ReviewReplyModifyRequest;
 import spharos.review_bookmark.review.vo.request.ReviewReplyRegisterRequest;
 import spharos.review_bookmark.review.vo.response.ClientReviewDetailResponse;
 import spharos.review_bookmark.review.vo.response.ClientReviewListResponse;
@@ -57,6 +58,20 @@ public class ClientReviewController {
 
         // 리뷰 답글 작성
         clientReviewService.registerReviewReply(request);
+        return new BaseResponse<>();
+    }
+
+    /*
+        리뷰 답글 수정
+    */
+    @Operation(summary = "리뷰 답글 수정",
+            description = "리뷰 답글 수정",
+            tags = { " Client Review" })
+    @PutMapping("/reply")
+    public BaseResponse<?> modifyReviewReply(@RequestBody ReviewReplyModifyRequest request) {
+
+        // 리뷰 답글 수정
+        clientReviewService.modifyReviewReply(request);
         return new BaseResponse<>();
     }
 

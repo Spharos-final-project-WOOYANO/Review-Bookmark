@@ -54,4 +54,10 @@ public class Review extends BaseEntity {
         this.answerCreatedAt = answerCreatedAt;
     }
 
+    // 리뷰 답글 수정
+    public void modifyReply(String answerContent, LocalDateTime answerUpdatedAt) {
+        this.answerContent = answerContent;
+        this.answerUpdatedAt = answerUpdatedAt;
+    }
+
 }
