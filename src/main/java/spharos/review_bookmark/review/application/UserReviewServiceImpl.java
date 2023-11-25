@@ -122,5 +122,20 @@ public class UserReviewServiceImpl implements UserReviewService {
         reviewRepository.delete(review);
     }
 
+    // 리뷰등록가능여부 조회
+    @Override
+    public Boolean checkReviewAvailable(String reservationNum) {
+
+        // 예약정보로 리뷰조회
+        Review review = reviewRepository.findByReservationNum(reservationNum);
+
+        // 해당 예약번호의 리뷰가 존재하지 않는 경우 true
+        if(review == null) {
+            return Boolean.TRUE;
+        }
+
+        return Boolean.FALSE;
+    }
+
 
 }
