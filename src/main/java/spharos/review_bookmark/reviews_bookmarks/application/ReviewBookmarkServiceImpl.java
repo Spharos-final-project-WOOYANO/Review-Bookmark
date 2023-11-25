@@ -26,7 +26,7 @@ public class ReviewBookmarkServiceImpl implements ReviewBookmarkService{
                 .map(dto -> MostBookmarkReviewCountDto.builder()
                         .serviceId(dto.getServiceId())
                         .bookmarkCount(dto.getBookmarkCount())
-                        .reviewCount(reviewRepository.findCountByServiceId(dto.getServiceId()))
+                        .reviewCount(reviewRepository.findByServiceId(dto.getServiceId()).size())
                         .build())
                 .toList();
 
