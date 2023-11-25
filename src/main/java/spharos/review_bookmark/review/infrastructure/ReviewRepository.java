@@ -10,6 +10,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByServiceId(Long serviceId);
 
-    Review findByReservationNum(String reservationNum);
-
 }
