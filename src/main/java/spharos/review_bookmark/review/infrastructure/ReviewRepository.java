@@ -10,4 +10,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByServiceId(Long serviceId);
 
+    int findCountByServiceId(Long serviceId);
+
 }

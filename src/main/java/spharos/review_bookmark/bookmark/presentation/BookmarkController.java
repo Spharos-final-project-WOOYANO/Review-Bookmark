@@ -53,5 +53,4 @@ public class BookmarkController {
         return new BaseResponse<>();
     }
 
-
 }

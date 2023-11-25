@@ -14,4 +14,5 @@ public interface BookmarkService {
     // 찜 추가
     void registerBookmark(String email, Long serviceId);
 
+
 }

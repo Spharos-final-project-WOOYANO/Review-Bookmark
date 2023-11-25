@@ -9,6 +9,7 @@ import spharos.review_bookmark.bookmark.infrastructure.BookmarkRepository;
 import spharos.review_bookmark.bookmark.vo.response.BookmarkResponse;
 import spharos.review_bookmark.global.common.response.ResponseCode;
 import spharos.review_bookmark.global.exception.CustomException;
+import spharos.review_bookmark.review.infrastructure.ReviewRepository;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 public class BookmarkServiceImpl implements BookmarkService{
 
     private final BookmarkRepository bookmarkRepository;
-
+    private final ReviewRepository reviewRepository;
     // 찜리스트조회
     @Override
     public List<BookmarkResponse> getBookmarkList(String email) {

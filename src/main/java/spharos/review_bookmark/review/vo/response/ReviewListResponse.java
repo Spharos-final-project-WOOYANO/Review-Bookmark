@@ -1,4 +1,4 @@
-package spharos.review_bookmark.review.dto;
+package spharos.review_bookmark.review.vo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,16 +8,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ReviewListDto {
-
+@NoArgsConstructor
+@Builder
+public class ReviewListResponse {
+    private Long serviceId;
     private Long reviewId;
     private String content;
     private LocalDateTime createAt;
     private List<String> imageUrlList;
     private String answerContent;
     private boolean reuse;
-
 }

@@ -55,6 +55,7 @@ public class ReviewServiceImpl implements ReviewService{
                             .toList();
 
                     return ReviewListDto.builder()
+                            .reviewId(review.getId())
                             .content(review.getContent())
                             .createAt(review.getCreatedAt())
                             .imageUrlList(reviewImageUrlList)
