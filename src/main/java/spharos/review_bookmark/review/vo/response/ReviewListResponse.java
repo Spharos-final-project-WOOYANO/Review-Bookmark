@@ -19,4 +19,5 @@ public class ReviewListResponse {
     private List<String> imageUrlList;
     private String answerContent;
     private boolean reuse;
+    private String userEmail;
 }

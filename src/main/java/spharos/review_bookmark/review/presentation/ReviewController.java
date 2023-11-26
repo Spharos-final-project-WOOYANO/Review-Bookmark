@@ -47,6 +47,7 @@ public class ReviewController {
                         .imageUrlList(dto.getImageUrlList())
                         .answerContent(dto.getAnswerContent())
                         .reuse(dto.isReuse())
+                        .userEmail(dto.getUserEmail())
                         .build())
                 .toList();
 

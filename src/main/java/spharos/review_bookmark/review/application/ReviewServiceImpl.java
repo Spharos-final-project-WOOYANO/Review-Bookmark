@@ -61,6 +61,7 @@ public class ReviewServiceImpl implements ReviewService{
                             .imageUrlList(reviewImageUrlList)
                             .answerContent(review.getAnswerContent())
                             .reuse(review.getReuse())
+                            .userEmail(review.getUserEmail())
                             .build();
 
                 })

@@ -19,5 +19,6 @@ public class ReviewListDto {
     private List<String> imageUrlList;
     private String answerContent;
     private boolean reuse;
+    private String userEmail;
 
 }
